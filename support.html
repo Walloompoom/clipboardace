@@ -1,275 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support — Copy/Paste Clipboard Ace</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Copy/Paste Clipboard Ace</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.6;
-        }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f7f6f1;
+    color: #1d1d1f;
+    line-height: 1.6;
+}
 
-        header {
-            background: #fff;
-            border-bottom: 1px solid #e0e0e5;
-            padding: 24px 40px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+header {
+    background: linear-gradient(135deg, #00599c, #0095d9);
+    color: white;
+    padding: 34px 40px;
+    border-bottom: 5px solid #b89000;
+}
 
-        header img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-        }
+header h1 {
+    font-size: 26px;
+    font-weight: 700;
+}
 
-        header h1 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
+header p {
+    font-size: 15px;
+    opacity: 0.9;
+}
 
-        header p {
-            font-size: 14px;
-            color: #6e6e73;
-        }
+.container {
+    max-width: 780px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
 
-        .container {
-            max-width: 780px;
-            margin: 48px auto;
-            padding: 0 24px;
-        }
+.card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-top: 4px solid #d6b447;
+}
 
-        .card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #00599c;
+}
 
-        .card h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #1d1d1f;
-        }
+.card p,
+.card li {
+    font-size: 15px;
+    color: #3a3a3c;
+}
 
-        .card p {
-            font-size: 15px;
-            color: #3a3a3c;
-            margin-bottom: 12px;
-        }
+.steps {
+    list-style: none;
+    counter-reset: steps;
+}
 
-        .card p:last-child { margin-bottom: 0; }
+.steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+}
 
-        .faq-item {
-            border-bottom: 1px solid #f0f0f5;
-            padding: 18px 0;
-        }
+.steps li::before {
+    content: counter(steps);
+    background: #b89000;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
 
-        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .faq-item:first-child { padding-top: 0; }
+.faq-item {
+    border-bottom: 1px solid #eee4c4;
+    padding: 18px 0;
+}
 
-        .faq-item h3 {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 8px;
-        }
+.faq-item:last-child {
+    border-bottom: none;
+}
 
-        .faq-item p {
-            font-size: 14px;
-            color: #3a3a3c;
-            margin: 0;
-        }
+.faq-item h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #1d1d1f;
+}
 
-        .steps {
-            list-style: none;
-            counter-reset: steps;
-        }
+.contact-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #00599c, #0095d9);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+}
 
-        .steps li {
-            counter-increment: steps;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            margin-bottom: 14px;
-            font-size: 15px;
-            color: #3a3a3c;
-        }
+.contact-btn:hover {
+    opacity: 0.9;
+}
 
-        .steps li:last-child { margin-bottom: 0; }
+code {
+    background: #f7f6f1;
+    border: 1px solid #d6b447;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 13px;
+}
 
-        .steps li::before {
-            content: counter(steps);
-            background: #0071e3;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
+footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+    color: #6e6e73;
+}
 
-        .contact-btn {
-            display: inline-block;
-            background: #0071e3;
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 980px;
-            font-size: 15px;
-            font-weight: 500;
-            margin-top: 8px;
-            transition: background 0.2s;
-        }
-
-        .contact-btn:hover { background: #0077ed; }
-
-        .badge {
-            display: inline-block;
-            background: #f0f4ff;
-            color: #0071e3;
-            border-radius: 6px;
-            padding: 2px 8px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 6px;
-        }
-
-        code {
-            background: #f5f5f7;
-            border: 1px solid #e0e0e5;
-            border-radius: 4px;
-            padding: 1px 6px;
-            font-size: 13px;
-            font-family: "SF Mono", Monaco, monospace;
-        }
-
-        footer {
-            text-align: center;
-            padding: 32px 24px;
-            font-size: 13px;
-            color: #6e6e73;
-        }
-
-        footer a { color: #0071e3; text-decoration: none; }
-    </style>
+footer a {
+    color: #00599c;
+    text-decoration: none;
+    font-weight: 600;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <div>
-        <h1>Copy/Paste Clipboard Ace</h1>
-        <p>Support &amp; Help</p>
-    </div>
+    <h1>Copy/Paste Clipboard Ace</h1>
+    <p>Support & Help</p>
 </header>
 
 <div class="container">
 
-    <!-- Quick start -->
     <div class="card">
         <h2>Getting Started</h2>
         <ul class="steps">
-            <li>After launching, the app lives in your Mac's menu bar — look for the clipboard icon near the clock in the top-right corner.</li>
-            <li>Copy anything — text, images, files — and it appears in the list automatically.</li>
-            <li>Click any item in the list to paste it instantly into your active app.</li>
-            <li>Lock an item by clicking the lock icon on the left to keep it in your list permanently.</li>
+            <li>After launching, the app lives in your Mac’s menu bar near the clock.</li>
+            <li>Copy text, images, or files to add them to your clipboard history.</li>
+            <li>Click any item in the list to reuse it.</li>
+            <li>Lock important items so they stay available.</li>
         </ul>
     </div>
 
-    <!-- Auto-paste permission -->
     <div class="card">
         <h2>Enabling Auto-Paste</h2>
         <p>Copy/Paste Clipboard Ace can paste items directly into your active app with one click. This requires macOS Accessibility permission.</p>
         <ul class="steps">
             <li>Open <strong>System Settings</strong> on your Mac.</li>
-            <li>Go to <strong>Privacy &amp; Security → Accessibility</strong>.</li>
-            <li>Find <strong>Copy/Paste Clipboard Ace</strong> in the list and toggle it <strong>on</strong>.</li>
-            <li>If the app isn't listed yet, click the <strong>+</strong> button and add it from your Applications folder.</li>
+            <li>Go to <strong>Privacy & Security → Accessibility</strong>.</li>
+            <li>Find <strong>Copy/Paste Clipboard Ace</strong> and turn it on.</li>
+            <li>If it is not listed, add it from your Applications folder.</li>
         </ul>
-        <p style="margin-top:16px; font-size:14px; color:#6e6e73;">Without this permission, items are still copied to your clipboard — you can paste them manually with ⌘V.</p>
+        <p>Without this permission, items are still copied to your clipboard and can be pasted manually with <strong>⌘V</strong>.</p>
     </div>
 
-    <!-- FAQ -->
     <div class="card">
         <h2>Frequently Asked Questions</h2>
 
         <div class="faq-item">
             <h3>Is my clipboard data sent anywhere?</h3>
-            <p>No. Everything stays on your Mac. No data is uploaded, transmitted, or shared with anyone — ever. You can verify this in <strong>Preferences → Privacy</strong>.</p>
+            <p>No. Clipboard data stays on your Mac and is not uploaded or shared.</p>
         </div>
 
         <div class="faq-item">
-            <h3>How do I stop the app from monitoring my clipboard?</h3>
-            <p>Open <strong>Preferences → Privacy</strong> and toggle off <strong>Monitor clipboard automatically</strong>. You can also pause it temporarily from the same screen.</p>
+            <h3>How do I stop clipboard monitoring?</h3>
+            <p>Open <strong>Preferences → Privacy</strong> and turn off <strong>Monitor clipboard automatically</strong>.</p>
         </div>
 
         <div class="faq-item">
             <h3>How do I delete my clipboard history?</h3>
-            <p>Open <strong>Preferences → Privacy → Clear all clipboard history</strong>. This removes all items including locked ones. History is also automatically cleared when you quit the app.</p>
+            <p>Open <strong>Preferences → Privacy</strong> and click <strong>Clear all clipboard history</strong>.</p>
         </div>
 
         <div class="faq-item">
-            <h3>The app icon isn't in my menu bar.</h3>
-            <p>Make sure the app is running. If it still doesn't appear, your menu bar may be full — try holding <strong>⌘</strong> and dragging some icons to make space, or check <strong>System Settings → Control Centre</strong>.</p>
+            <h3>What is Skip Sensitive Content?</h3>
+            <p>When enabled, the app attempts to skip passwords, credit cards, and social security numbers. It is enabled by default but may not detect everything.</p>
         </div>
 
         <div class="faq-item">
-            <h3>How do I use the keyboard shortcut to paste?</h3>
-            <p>The default shortcuts are <code>⌥V</code> to paste the top item and <code>⇧⌥V</code> to paste all items. You can customize these in <strong>Preferences → Shortcuts</strong>.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>How do I split copied lines into individual items?</h3>
-            <p>Tap the split icon <span class="badge">⇥</span> in the main window header, or enable <strong>List copied lines (split by line breaks) individually</strong> in <strong>Preferences → General</strong>.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>What is "Skip sensitive content"?</h3>
-            <p>When enabled (on by default), the app attempts to detect and skip passwords, credit cards, and social security numbers. It's not foolproof — avoid copying highly sensitive data into any clipboard manager.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>How do I lock an item so it stays in the list?</h3>
-            <p>Hover over any item and click the lock icon on the left side of the row. Locked items appear at the bottom of the list and survive Clear All and app restarts.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>The app pasted a √ character instead of my item.</h3>
-            <p>This can happen if your keyboard shortcut uses <code>⌥V</code> alone without proper interception. Go to <strong>Preferences → Shortcuts</strong> and reassign the shortcut to a combo that includes <code>⌃</code> (Control), such as <code>⌃⌥V</code>.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>How do I remove the app from Accessibility in System Settings?</h3>
-            <p>Open <strong>System Settings → Privacy &amp; Security → Accessibility</strong>, find Copy/Paste Clipboard Ace, and click the <strong>−</strong> button to remove it. The app will still work — auto-paste will simply be disabled.</p>
+            <h3>How do I use keyboard shortcuts?</h3>
+            <p>The default shortcuts are <code>⌥V</code> to paste the top item and <code>⇧⌥V</code> to paste all items. You can change these in <strong>Preferences → Shortcuts</strong>.</p>
         </div>
 
     </div>
 
-    <!-- Contact -->
     <div class="card">
-        <h2>Still need help?</h2>
-        <p>If you've found a bug, have a feature request, or just need a hand — we'd love to hear from you.</p>
-        <a class="contact-btn" href="mailto:jamesthegifted@gmail.com">Contact Support</a>
+        <h2>Still Need Help?</h2>
+        <p>If you found a bug, have a feature request, or need help, contact support.</p>
+        <a class="contact-btn" href="mailto:support@w3winnow.com">Contact Support</a>
     </div>
 
 </div>
 
 <footer>
-    <p>Copy/Paste Clipboard Ace &nbsp;·&nbsp; <a href="https://w3winnow.com/copy-paste-clipboard-ace-privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; © 2025 W3Winnow</p>
+    <p><a href="index.html">Privacy Policy</a> · © 2025 W3Winnow</p>
 </footer>
 
 </body>
